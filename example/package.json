@@ -1,11 +1,11 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "sqlite": "ts-node src/sqlite.ts",
-    "postgres": "ts-node src/postgres.ts",
-    "mysql": "ts-node src/mysql.ts"
+    "sqlite": "bun run src/sqlite.ts",
+    "postgres": "bun run src/postgres.ts",
+    "mysql": "bun run src/mysql.ts"
   },
   "keywords": [],
   "author": "",

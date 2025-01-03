@@ -4,6 +4,8 @@ Tools for Vercel AI SDK that lets your AI query PostgreSQL, MySQL or SQLite data
 
 ## Usage
 
+Note: We rely on bun for running these, but not for installing.
+
 ```ts
 import * as ai from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
