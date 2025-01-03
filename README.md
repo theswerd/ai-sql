@@ -2,6 +2,9 @@
 
 Tools for **Vercel AI SDK** that lets your AI query **PostgreSQL, MySQL or SQLite** databases in one line.
 
+> [!CAUTION]
+> AI-generated SQL queries are not recommended in production and could risk injection attacks. Please proceed with caution.
+
 ## Installation
 
 ```bash
