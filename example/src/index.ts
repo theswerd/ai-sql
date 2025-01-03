@@ -16,7 +16,7 @@ const model = openai("gpt-4-turbo", {
 const { text } = await ai.generateText({
   model: openai("gpt-4-turbo"),
   prompt:
-    "Insert a random name into the employees table, and return all employees",
+    "Create an employees table and an hours table to track work, add some example empoyees and hours, and return all employees",
   tools: {
     postgreSQL: await postgreSQLTool(process.env.POSTGRES_URL!),
   },
