@@ -43,7 +43,6 @@ CREATE TABLE ${table_schema}.${table_name} (
     description: `Query PostgreSQL Database with the following schema:\n\n${schema}`,
     execute: async (query) => {
       const result = await client.query(query.query!);
-      console.log(result);
 
       const res = Array.isArray(result) ? result : [result];
       const rows = res.map((r: QueryResult) => r.rows);
