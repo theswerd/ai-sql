@@ -1,6 +1,6 @@
 # AI SQL
 
-Tools for Vercel AI SDK that lets your AI query PostgreSQL, MySQL or SQLite databases in one line.
+Tools for Vercel AI SDK that lets your AI query **PostgreSQL, MySQL or SQLite** databases in one line.
 
 ## Installation
 
@@ -31,7 +31,7 @@ const { text } = await ai.generateText({
 
 For more examples, see the [example](./example) directory.
 
-## Creating a provider
+## Creating a Custom Database Provider
 
 ```typescript
 import { Schema, Database, sqlTool } from "ai-sql";
