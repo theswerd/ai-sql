@@ -83,7 +83,6 @@ export class SQLiteTool implements Database {
 
   async describe(): Promise<Schema> {
     const description: string = await getDatabaseSchema(this.db);
-    console.log(description);
 
     return {
       database: "PostgreSQL",
