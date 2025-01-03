@@ -13,13 +13,33 @@
 2. Install dependencies:
 
    ```sh
-   bun install
+   npm install
    ```
 
 3. Run the example:
 
    ```sh
-   bun run src/postgres.ts
+   npm run postgres
+   ```
+
+## Usage for SQLite
+
+1. Create .env file with the following content:
+
+   ```env
+   OPEN_AI_API_KEY=your-openai-api-key
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Run the example:
+
+   ```sh
+   npm run sqlite
    ```
 
 ## Usage for MySQL
@@ -37,11 +57,11 @@
 2. Install dependencies:
 
    ```sh
-    bun install
+    npm install
    ```
 
 3. Run the example:
 
    ```sh
-   bun run src/mysql.ts
+    npm run mysql
    ```
