@@ -27,9 +27,12 @@
 1. Create .env file with the following content:
 
    ```env
-   MYSQL_URL=mysql://user:password@localhost:3306/dbname
+   MYSQL_URL=mysql://user:password@localhost:3306/dbname?multipleStatements=true
    OPENAI_API_KEY=your-openai-api-key
    ```
+
+   > [!IMPORTANT]
+   > Add `?multipleStatements=true` to the end of the MySQL URL, the AI commonly sends multiple queries in one request.
 
 2. Install dependencies:
 

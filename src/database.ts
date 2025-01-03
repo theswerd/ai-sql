@@ -36,7 +36,13 @@ export async function sqlTool(db: Database, { notes }: SqlToolOptions = {}) {
     },
 
     parameters: z.object({
-      query: z.string().describe(`${schema.database} Query to execute`),
+      query: z
+        .string()
+        .describe(
+          `${schema.database} Query to execute.\n\nNotes: ${schema.notes?.join(
+            ", "
+          )}`
+        ),
     }),
   });
 }

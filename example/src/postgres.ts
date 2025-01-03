@@ -18,7 +18,7 @@ const params = {
 const { text: text1 } = await ai.generateText({
   ...params,
   tools: {
-    postgreSQL: await postgres(process.env.POSTGRES_URL!),
+    database: await postgres(process.env.POSTGRES_URL!),
   },
   prompt:
     "Create an employees table and an hours table to track work, add some example empoyees and hours (about 1 month worth of entries for each employee), and return all employees",

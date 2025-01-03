@@ -18,9 +18,10 @@ const params = {
 const { text: text1 } = await ai.generateText({
   ...params,
   tools: {
-    postgreSQL: await mysql(process.env.MYSQL_URL!, {
-      notes:
-        "SERIAL is an alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE",
+    database: await mysql(process.env.MYSQL_URL!, {
+      notes: [
+        "SERIAL is an alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE, if you want a foreign key to reference this column, you should use BIGINT UNSIGNED NOT NULL",
+      ],
     }),
   },
   prompt:
@@ -32,10 +33,12 @@ console.log("OUTPUT", text1);
 const { text: text2 } = await ai.generateText({
   ...params,
   tools: {
-    postgreSQL: await mysql(process.env.MYSQL_URL!),
+    database: await mysql(process.env.MYSQL_URL!, {
+      notes: ["Only query tables that exist"],
+    }),
   },
   prompt:
-    "How many employees worked more than 10 hours during any week of the month?",
+    "Please return the 3 employees with the most hours worked, and the hours they worked",
 });
 
 console.log("OUTPUT", text2);

@@ -23,12 +23,12 @@ export class MySQLTool implements Database {
     }[] = await new Promise((resolve, reject) =>
       this.client.query(
         {
-          sql: `SELECT table_schema, 
-       table_name, 
+          sql: `SELECT table_schema,
+       table_name,
        GROUP_CONCAT(
            CONCAT(
-               column_name, ' ', 
-               CASE 
+               column_name, ' ',
+               CASE
                    WHEN data_type = 'varchar' THEN CONCAT('VARCHAR(', character_maximum_length, ')')
                    WHEN data_type = 'char' THEN CONCAT('CHAR(', character_maximum_length, ')')
                    WHEN data_type = 'decimal' THEN CONCAT('DECIMAL(', numeric_precision, ',', numeric_scale, ')')
@@ -36,6 +36,7 @@ export class MySQLTool implements Database {
                END, ' ',
                IF(is_nullable = 'YES', 'NULL', 'NOT NULL')
            ) ORDER BY ordinal_position
+           SEPARATOR '\n' -- Newline separator
        ) AS columns
 FROM information_schema.columns
 WHERE table_schema NOT IN ('information_schema', 'mysql', 'performance_schema', 'sys')
@@ -52,7 +53,6 @@ ORDER BY table_schema, table_name;
       )
     );
 
-    console.log("INITAILIZATION TABLES", res);
     const createTableStatements = res.map((row) => {
       const { table_schema, table_name, columns } = row;
 
@@ -73,10 +73,8 @@ ORDER BY table_schema, table_name;
   }
 
   async query(query: string): Promise<object[]> {
-    console.log("QUERY", query);
     const res = await new Promise((resolve, reject) =>
-      this.client.query(query, (err, res) => {
-        console.log("QUERY RESULT", res);
+      this.client.query({ sql: query }, (err, res) => {
         if (err) {
           reject(err);
         }

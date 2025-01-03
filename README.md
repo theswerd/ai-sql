@@ -23,10 +23,12 @@ const { text } = await ai.generateText({
 });
 ```
 
+For more examples, see the [example](./example) directory.
+
 ## Creating a provider
 
 ```typescript
-import { Schema, Database, sqlTool } from 'ai-sql';
+import { Schema, Database, sqlTool } from "ai-sql";
 
 export class MyDbTool implements Database {
   async initialize() {
@@ -45,18 +47,17 @@ export class MyDbTool implements Database {
           id integer primary key,
           text string not null,
         );
-      `
-    }
+      `,
+    };
   }
 
   async query(query: string) {
     // return result rows here
-    return []
+    return [];
   }
 }
 
-
 const tools = {
   database: await sqlTool(new MyDbTool()),
-}
+};
 ```
