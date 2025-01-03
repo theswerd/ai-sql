@@ -1,4 +1,4 @@
-import { postgreSQLTool } from "../../src";
+import { postgres } from "../../src";
 import * as dotenv from "dotenv";
 import * as ai from "ai";
 dotenv.config();
@@ -18,7 +18,7 @@ const params = {
 const { text: text1 } = await ai.generateText({
   ...params,
   tools: {
-    postgreSQL: await postgreSQLTool(process.env.POSTGRES_URL!),
+    postgreSQL: await postgres(process.env.POSTGRES_URL!),
   },
   prompt:
     "Create an employees table and an hours table to track work, add some example empoyees and hours (about 1 month worth of entries for each employee), and return all employees",
@@ -29,7 +29,7 @@ console.log("OUTPUT", text1);
 const { text: text2 } = await ai.generateText({
   ...params,
   tools: {
-    postgreSQL: await postgreSQLTool(process.env.POSTGRES_URL!),
+    postgreSQL: await postgres(process.env.POSTGRES_URL!),
   },
   prompt:
     "How many employees worked more than 10 hours during any week of the month?",
