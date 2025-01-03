@@ -2,6 +2,12 @@
 
 Tools for Vercel AI SDK that lets your AI query PostgreSQL, MySQL or SQLite databases in one line.
 
+## Installation
+
+```bash
+npm install ai-sql
+```
+
 ## Usage
 
 ```ts

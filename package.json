@@ -1,7 +1,7 @@
 {
   "name": "ai-sql",
   "description": "Give any Vercel AI SDK project the ability to interact with PostgreSQL, SQlite or MySQL databases in one line.",
-  "version": "0.0.1-6",
+  "version": "0.0.1-7",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
