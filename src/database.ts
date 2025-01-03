@@ -11,10 +11,10 @@ export interface Database {
 
   describe: () => Promise<Schema>;
 
-  query: (query: string) => Promise<object[]>;
+  query: (query: string) => Promise<unknown[]>;
 }
 
-const descriptionTemplate = (schema: object) =>
+const descriptionTemplate = (schema: unknown) =>
   `Query a database with the following schema:\n\n${JSON.stringify(schema)}`;
 
 export async function sqlTool(db: Database) {
