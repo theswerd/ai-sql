@@ -11,7 +11,6 @@ import { postgres, sqlTool } from "ai-sql"; // or mysql, sqlite
 
 const openai = createOpenAI({
   compatibility: "strict",
-  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 const model = openai("gpt-4-turbo");
