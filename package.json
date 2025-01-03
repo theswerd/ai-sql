@@ -1,20 +1,35 @@
 {
   "name": "ai-sql",
-  "version": "1.0.0",
-  "main": "index.js",
+  "description": "Give any Vercel AI SDK project the ability to interact with PostgreSQL, SQlite or MySQL databases in one line.",
+  "version": "0.0.1-2",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkgroll"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Benjamin Swerdlow",
+  "license": "MIT",
   "dependencies": {
     "ai": "^4.0.23",
     "pg": "^8.13.1",
+    "@types/pg": "^8.11.10",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.10"
+    "pkgroll": "^2.6.0",
+    "typescript": "^5.7.2"
   }
 }
