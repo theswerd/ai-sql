@@ -1,5 +1,7 @@
 # AI-SQL Example
 
+Note: We rely on bun for running these, but not for installing.
+
 ## Usage for PostgreSQL
 
 1. Create .env file with the following content:
