@@ -1,12 +1,21 @@
-import { tool } from "ai";
-import { z } from "zod";
 import { Client, QueryResult } from "pg";
 
-export const postgreSQLTool = async (database_url: string) => {
-  const client = new Client(database_url);
-  await client.connect();
+import { Schema, Database } from "./database";
 
-  const result = await client.query(`
+class PostgresTool implements Database {
+  private url: string;
+  private client: Client;
+  private schema: string;
+
+  constructor(dbUrl: string) {
+    this.url = dbUrl;
+  }
+
+  async initialize() {
+    this.client = new Client(this.url);
+    await this.client.connect();
+
+    const result = await this.client.query(`
     SELECT table_schema,
        table_name,
        string_agg(
@@ -26,31 +35,33 @@ GROUP BY table_schema, table_name
 ORDER BY table_schema, table_name;
 `);
 
-  const createTableStatements = result.rows.map((row) => {
-    const { table_schema, table_name, columns } = row;
+    const createTableStatements = result.rows.map((row) => {
+      const { table_schema, table_name, columns } = row;
 
-    // Construct the CREATE TABLE statement
-    return `
-CREATE TABLE ${table_schema}.${table_name} (
-  ${columns}
-);
-    `.trim();
-  });
+      // Construct the CREATE TABLE statement
+      return `
+        CREATE TABLE ${table_schema}.${table_name} (
+          ${columns}
+        );
+      `.trim();
+    });
 
-  let schema = createTableStatements.join("\n\n");
+    const schema = createTableStatements.join("\n\n");
 
-  return tool({
-    description: `Query PostgreSQL Database with the following schema:\n\n${schema}`,
-    execute: async (query) => {
-      const result = await client.query(query.query!);
+    this.schema = schema;
+  }
 
-      const res = Array.isArray(result) ? result : [result];
-      const rows = res.map((r: QueryResult) => r.rows);
+  async describe(): Promise<Schema> {
+    return {
+      database: "PostgreSQL",
+      description: this.schema,
+    };
+  }
 
-      return rows;
-    },
-    parameters: z.object({
-      query: z.string().describe("SQL Query to execute"),
-    }),
-  });
-};
+  async query(query: string) {
+    const result = await this.client.query(query);
+
+    const res = Array.isArray(result) ? result : [result];
+    return res.map((r: QueryResult) => r.rows);
+  }
+}
