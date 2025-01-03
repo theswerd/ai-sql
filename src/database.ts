@@ -4,6 +4,7 @@ import { z } from "zod";
 export interface Schema {
   database: string;
   description: string;
+  notes?: string[];
 }
 
 export interface Database {
@@ -17,10 +18,15 @@ export interface Database {
 const descriptionTemplate = (schema: unknown) =>
   `Query a database with the following schema:\n\n${JSON.stringify(schema)}`;
 
-export async function sqlTool(db: Database) {
+export interface SqlToolOptions {
+  notes?: string[];
+}
+
+export async function sqlTool(db: Database, { notes }: SqlToolOptions = {}) {
   await db.initialize();
 
   const schema = await db.describe();
+  schema.notes = notes;
 
   return tool({
     description: descriptionTemplate(schema),
