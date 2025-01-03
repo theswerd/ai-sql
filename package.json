@@ -30,9 +30,10 @@
   "author": "Benjamin Swerdlow",
   "license": "MIT",
   "dependencies": {
-    "ai": "^4.0.23",
-    "pg": "^8.13.1",
     "@types/pg": "^8.11.10",
+    "ai": "^4.0.23",
+    "mysql2": "^3.12.0",
+    "pg": "^8.13.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {
