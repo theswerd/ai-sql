@@ -22,3 +22,41 @@ const { text } = await ai.generateText({
   maxSteps: 3,
 });
 ```
+
+## Creating a provider
+
+```typescript
+import { Schema, Database, sqlTool } from 'ai-sql';
+
+export class MyDbTool implements Database {
+  async initialize() {
+    // do setup here
+  }
+
+  async describe(): Promise<Schema> {
+    // describe the schema
+
+    return {
+      // database type
+      database: "my database",
+      // stringified schema representation
+      description: `
+        create table messages (
+          id integer primary key,
+          text string not null,
+        );
+      `
+    }
+  }
+
+  async query(query: string) {
+    // return result rows here
+    return []
+  }
+}
+
+
+const tools = {
+  database: await sqlTool(new MyDbTool()),
+}
+```
